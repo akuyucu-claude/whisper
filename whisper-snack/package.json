@@ -1,0 +1,25 @@
+{
+  "name": "whisper-snack",
+  "version": "1.0.0",
+  "description": "Whisper - Your taste, everywhere you go. An Expo Snack app for discovering venues based on your moment and patterns.",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "expo": "~52.0.0",
+    "expo-location": "~18.0.0",
+    "expo-speech": "~12.0.0",
+    "react": "18.3.1",
+    "react-native": "0.76.4"
+  },
+  "keywords": [
+    "expo",
+    "snack",
+    "whisper",
+    "venues",
+    "discovery",
+    "location",
+    "gps"
+  ]
+}
