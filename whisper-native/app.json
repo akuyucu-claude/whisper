@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "Whisper",
+    "slug": "whisper",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0e0c0a",
+    "scheme": "whisper",
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Whisper uses your location to discover amazing places nearby"
+        }
+      ]
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Whisper uses your location to discover amazing places nearby",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Whisper needs background location to whisper about nearby places even when the app is in your pocket",
+        "UIBackgroundModes": [
+          "location",
+          "audio"
+        ],
+        "AVAudioDefaultSpeakerAmbient": true
+      }
+    },
+    "android": {
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION",
+        "FOREGROUND_SERVICE"
+      ],
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#0e0c0a"
+      }
+    }
+  }
+}
