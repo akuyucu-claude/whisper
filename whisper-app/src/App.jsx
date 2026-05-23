@@ -26,6 +26,7 @@ export default function App() {
   const [showReasonPicker, setShowReasonPicker] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
   const [liveWhispers, setLiveWhispers] = useState([])
+  const [selectedVenue, setSelectedVenue] = useState(null)
   const placesGenerated = useRef(false)
 
   // Real location tracking (activates on main screen)
@@ -88,7 +89,12 @@ export default function App() {
     }, src.delay)
   }
 
-  const openVenue = () => { setShowVenue(true); setActiveWhisper(null); stopSpeaking() }
+  const openVenue = (venue) => {
+    setSelectedVenue(venue || activeWhisper || null)
+    setShowVenue(true)
+    setActiveWhisper(null)
+    stopSpeaking()
+  }
 
   const handleMaybeLater = () => { setShowReasonPicker(true); stopSpeaking() }
 
@@ -162,7 +168,7 @@ export default function App() {
             onFilterChange={setFilter}
             readIds={readIds}
             onWhisperRead={(id) => setReadIds(p => [...p, id])}
-            onVenueOpen={() => setShowVenue(true)}
+            onVenueOpen={() => { setSelectedVenue(null); setShowVenue(true) }}
             onTabChange={(t) => setTab(t)}
             unread={unread}
           />
@@ -172,7 +178,7 @@ export default function App() {
       {showVenue && (
         <div className="screen visible">
           <StatusBar />
-          <VenueDetail onClose={() => setShowVenue(false)} />
+          <VenueDetail onClose={() => setShowVenue(false)} venue={selectedVenue} />
         </div>
       )}
 

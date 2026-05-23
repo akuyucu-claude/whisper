@@ -23,6 +23,20 @@ export default function WhisperCard({ whisper, onDismiss, onVenueOpen, onMaybeLa
         </div>
         <div className="wc-venue-dist">{whisper.venue.dist} →</div>
       </div>
+      {(whisper.tastePct != null || whisper.social) && (
+        <div className="wc-signals">
+          {whisper.tastePct != null && (
+            <span className="wc-pill taste">✦ {whisper.tastePct}% your taste</span>
+          )}
+          {whisper.social && (
+            <span className="wc-pill social">
+              {whisper.social.lovers > 0
+                ? `👥 ${whisper.social.lovers} people like you · ${whisper.social.avgRating}★`
+                : `👥 fresh find · ${whisper.social.avgRating}★`}
+            </span>
+          )}
+        </div>
+      )}
       <div className="wc-context"><span>🧠</span>{whisper.context}</div>
       <div className="wc-actions">
         <button className="wc-btn primary" onClick={onVenueOpen}>{whisper.action}</button>

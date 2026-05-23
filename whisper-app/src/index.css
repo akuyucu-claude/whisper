@@ -663,6 +663,8 @@ body {
   background: var(--ink);
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 
 .map-area {
@@ -1033,6 +1035,62 @@ body {
   line-height: 1.5;
 }
 
+.wc-signals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.wc-pill {
+  font-size: 10px;
+  padding: 4px 9px;
+  border-radius: 10px;
+  letter-spacing: 0.03em;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.wc-pill.taste {
+  background: rgba(212, 168, 83, 0.12);
+  border: 1px solid rgba(212, 168, 83, 0.3);
+  color: var(--accent);
+}
+
+.wc-pill.social {
+  background: rgba(106, 158, 106, 0.12);
+  border: 1px solid rgba(106, 158, 106, 0.32);
+  color: #8fc28f;
+}
+
+/* Social proof block on the venue detail screen */
+.social-proof {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(106, 158, 106, 0.07);
+  border: 1px solid rgba(106, 158, 106, 0.22);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+}
+
+.social-proof-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.social-proof-text {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.45;
+}
+
+.social-proof-text strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
 .wc-actions {
   display: flex;
   gap: 8px;
@@ -1126,6 +1184,8 @@ body {
   background: var(--ink);
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 
 .feed-header {
