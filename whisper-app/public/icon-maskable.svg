@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="80%">
+      <stop offset="0%" stop-color="#1a1714" />
+      <stop offset="100%" stop-color="#0e0c0a" />
+    </radialGradient>
+    <linearGradient id="w" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8c97a" />
+      <stop offset="100%" stop-color="#c8a96e" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)" />
+  <text x="256" y="332" font-family="Georgia, 'Times New Roman', serif" font-size="240" font-style="italic" font-weight="400" fill="url(#w)" text-anchor="middle">W</text>
+</svg>

@@ -25,19 +25,21 @@ export default function MapView({
   const timeStr = `${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')}`
   const locStr = locationName?.full || (location ? `${location.latitude.toFixed(4)}, ${location.longitude.toFixed(4)}` : 'Locating...')
 
-  // Build chips from real nearby places or fallback
+  // Build chips from ranked recommendations (best taste/social match first).
   const chips = nearbyPlaces.length > 0
-    ? nearbyPlaces.slice(0, 4).map(p => ({
+    ? nearbyPlaces.slice(0, 5).map(p => ({
+        rec: p,
         emoji: p.emoji,
         name: p.name.replace(/^A /, ''),
-        dist: p.distance < 100 ? `${Math.round(p.distance)}m` : `${Math.round(p.distance)}m`,
-        hl: p.distance < 100,
+        dist: `${Math.round(p.distance)}m`,
+        match: p.tastePct,
+        hl: p.scores?.total > 0.62,
       }))
     : [
-        { emoji: "🫙", name: "Gram", dist: "2 min", hl: true },
-        { emoji: "🎵", name: "Plak Evi", dist: "40m" },
-        { emoji: "🎷", name: "Nardis", dist: "5 min" },
-        { emoji: "☕", name: "Kronotrop", dist: "3 min" },
+        { emoji: "☕", name: "small roastery", dist: "120m", match: 92, hl: true },
+        { emoji: "🫕", name: "family kitchen", dist: "210m", match: 95 },
+        { emoji: "🐟", name: "neighbourhood balıkçı", dist: "340m", match: 90 },
+        { emoji: "🍶", name: "natural wine bar", dist: "180m", match: 88 },
       ]
 
   return (
@@ -125,14 +127,14 @@ export default function MapView({
       </div>
 
       <div className="bottom-shelf">
-        <div className="shelf-label">Nearby · Matched to your taste</div>
+        <div className="shelf-label">Nearby · Ranked by your taste & people like you</div>
         <div className="nearby-scroll">
           {chips.map((n,i) => (
-            <div key={i} className={`nearby-chip ${n.hl ? 'hl' : ''}`} onClick={onVenueOpen}>
+            <div key={i} className={`nearby-chip ${n.hl ? 'hl' : ''}`} onClick={() => onVenueOpen(n.rec)}>
               <span style={{ fontSize:18 }}>{n.emoji}</span>
               <div>
                 <div className="chip-name">{n.name}</div>
-                <div className="chip-dist">{n.dist} away</div>
+                <div className="chip-dist">{n.dist} away{n.match != null ? ` · ${n.match}% match` : ''}</div>
               </div>
             </div>
           ))}

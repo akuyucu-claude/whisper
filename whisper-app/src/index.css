@@ -22,16 +22,26 @@
   --red: #b05050;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   font-family: 'DM Sans', sans-serif;
   background: #111;
   color: var(--text);
   overflow: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
 }
 
 #root {
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -171,6 +181,7 @@ body {
   align-items: center;
   justify-content: space-around;
   padding-bottom: 20px;
+  padding-bottom: calc(20px + env(safe-area-inset-bottom));
   z-index: 50;
 }
 
@@ -652,6 +663,8 @@ body {
   background: var(--ink);
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 
 .map-area {
@@ -1022,6 +1035,62 @@ body {
   line-height: 1.5;
 }
 
+.wc-signals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.wc-pill {
+  font-size: 10px;
+  padding: 4px 9px;
+  border-radius: 10px;
+  letter-spacing: 0.03em;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.wc-pill.taste {
+  background: rgba(212, 168, 83, 0.12);
+  border: 1px solid rgba(212, 168, 83, 0.3);
+  color: var(--accent);
+}
+
+.wc-pill.social {
+  background: rgba(106, 158, 106, 0.12);
+  border: 1px solid rgba(106, 158, 106, 0.32);
+  color: #8fc28f;
+}
+
+/* Social proof block on the venue detail screen */
+.social-proof {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(106, 158, 106, 0.07);
+  border: 1px solid rgba(106, 158, 106, 0.22);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+}
+
+.social-proof-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.social-proof-text {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.45;
+}
+
+.social-proof-text strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
 .wc-actions {
   display: flex;
   gap: 8px;
@@ -1115,6 +1184,8 @@ body {
   background: var(--ink);
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 
 .feed-header {
@@ -1545,6 +1616,7 @@ body {
   left: 0;
   right: 0;
   padding: 16px 24px 36px;
+  padding-bottom: calc(36px + env(safe-area-inset-bottom));
   background: linear-gradient(transparent, var(--surface) 40%);
   display: flex;
   gap: 12px;
@@ -1604,6 +1676,7 @@ body {
   width: 100%;
   border-radius: 28px 28px 0 0;
   padding: 24px;
+  padding-bottom: calc(24px + env(safe-area-inset-bottom));
   animation: slideUp 0.3s ease;
 }
 
@@ -1677,5 +1750,65 @@ body {
   to {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Mobile: drop the desktop "phone mockup" frame and let the app fill the
+   device screen. The real device supplies its own status bar / home indicator,
+   so the faux ones are hidden and safe-area insets keep content clear of the
+   notch and gesture bar.
+--------------------------------------------------------------------------- */
+@media (max-width: 600px) {
+  #root {
+    align-items: stretch;
+    justify-content: stretch;
+  }
+
+  .phone-shell {
+    padding: 0;
+    background: var(--ink);
+    border-radius: 0;
+    box-shadow: none;
+    width: 100%;
+    height: 100dvh;
+  }
+
+  /* Hide the simulated side buttons. */
+  .phone-shell::before,
+  .phone-shell::after {
+    display: none;
+  }
+
+  .phone {
+    width: 100%;
+    height: 100dvh;
+    border-radius: 0;
+  }
+
+  /* The device draws these for real. */
+  .dynamic-island,
+  .home-indicator,
+  .status-bar {
+    display: none;
+  }
+
+  /* Push fixed top UI below the notch / OS status bar. */
+  .map-header {
+    top: calc(20px + env(safe-area-inset-top));
+  }
+
+  .venue-back {
+    top: calc(20px + env(safe-area-inset-top));
+  }
+
+  .splash {
+    padding-top: calc(48px + env(safe-area-inset-top));
+  }
+
+  .connect-screen,
+  .profile-screen,
+  .feed-header {
+    padding-top: calc(36px + env(safe-area-inset-top));
   }
 }
